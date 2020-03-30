@@ -133,6 +133,15 @@
 			  <accelerator key="F4" modifiers="0" signal="activate"/>
 		    </widget>
 		  </child>
+		  <child>
+		    <widget class="GtkMenuItem" id="hide_groups_containing_only_choosen_folder">
+		      <property name="visible">True</property>
+		      <property name="label" translatable="yes">Hide groups containing only choosen directory</property>
+		      <property name="use_underline">True</property>
+		      <signal name="activate" handler="on_hide_groups_containing_only_choosen_folder_activate" last_modification_time="Fri, 09 Dec 2011 14:54:12 GMT"/>
+			  <accelerator key="F5" modifiers="0" signal="activate"/>
+		    </widget>
+		  </child>
 		</widget>
 	      </child>
 	    </widget>

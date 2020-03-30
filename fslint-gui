@@ -1417,6 +1417,8 @@ on your system at present."))
                 self.on_select_from_that_folder_activate(event)
             elif event.keyval in (ksyms.F4,):
                 self.on_select_from_choosen_folder_recursively_activate(event)
+            elif event.keyval in (ksyms.F5,):
+                self.on_hide_groups_containing_only_choosen_folder_activate(event)                
             elif event.keyval in (ksyms.Return,):
                 self.on_open_activate(event)
             elif event.keyval in (ksyms.Delete,):
@@ -1534,7 +1536,40 @@ on your system at present."))
         for row in xrange(clist.rows):
             if path in os.path.split(row_data[row])[0]:
                 select_func(row, 0)
-    
+
+    # hide all groups with only choosen folder
+    def on_hide_groups_containing_only_choosen_folder_activate(self, src):
+        clist = self.clists[self.mode]
+        if self.mode==self.mode_pkgs or len(clist.selection)!=1:
+            return
+        row = clist.selection[0] #menu item only enabled if 1 item selected
+        row_data = clist.get_data("row_data")
+        path = os.path.split(row_data[row])[0]
+        (response, path) = self.msgbox(_("path:"), ('Cancel', 'Ok'), path)
+
+        clist.freeze()
+        def group_all_matched(clist, row):
+            if row!=0 or not get_selectable(row, row_data): #for first sn row
+                row += 1
+            while row < clist.rows and get_selectable(row, row_data):
+                if path not in os.path.split(row_data[row])[0]:
+                    return 0
+                row += 1
+            return row
+
+        paths_to_hide=[]
+        for row in xrange(clist.rows):
+            if row==0 or not get_selectable(row, row_data): #New group
+                matched = group_all_matched(clist, row)
+                if matched> 0:
+                    paths_to_hide.extend(range(row,matched))
+
+        paths_to_hide.reverse()
+        for row in paths_to_hide:
+            row_data.pop(row)
+            clist.remove(row)
+        clist.thaw()
+                    
 
     def on_rename_activate(self, src):
         clist = self.clists[self.mode]
