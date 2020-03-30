@@ -515,8 +515,8 @@
                               </packing>
                             </child>
                             <child>
-                              <widget class="GtkCheckButton" id="exclusiveDirs">
-                                <property name="label" translatable="yes">exclusive?</property>
+                              <widget class="GtkCheckButton" id="betweenDirs">
+                                <property name="label" translatable="yes">between search paths?</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">False</property>

@@ -1051,9 +1051,26 @@ on your system at present."))
         inodes = {}
         #inodes required to correctly report disk usage of
         #duplicate files with seperate inode groups.
+        def check_between_dirs(dups):
+            if not self.betweenDirs.get_active():
+                return True
+            if self.ok_dirs.rows < 2:
+                return True
+
+            for row in range(self.ok_dirs.rows):
+                search_dir=self.ok_dirs.get_row_data(row)
+                between_dirs=False
+                for dup in dups:
+                    if search_dir not in dup[0]:
+                        between_dirs=True
+                if between_dirs == False:
+                    return False
+
+            return True
+
         for line in po:
             if line == '': #grouped == 1
-                if len(inodes)>1:
+                if len(inodes)>1 and check_between_dirs(dups): 
                     alldups.append(((numdups-1)*du, numdups, size, dups))
                 dups = []
                 numdups = 0
@@ -1070,7 +1087,7 @@ on your system at present."))
                     #file may have been deleted, changed permissions, ...
                     self.ShowErrors(str(sys.exc_info()[1])+'\n')
         else:
-            if len(inodes)>1:
+            if len(inodes)>1 and check_between_dirs(dups):
                 alldups.append(((numdups-1)*du, numdups, size, dups))
 
         alldups.sort()
