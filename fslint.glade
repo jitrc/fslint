@@ -493,22 +493,49 @@
 					</child>
 
 					<child>
-						<widget class="GtkCheckButton" id="recurseDirs">
-						<property name="visible">True</property>
-						<property name="can_focus">True</property>
-						<property name="label" translatable="yes">recurse?</property>
-						<property name="use_underline">True</property>
-						<property name="relief">GTK_RELIEF_NORMAL</property>
-						<property name="focus_on_click">True</property>
-						<property name="active">True</property>
-						<property name="inconsistent">False</property>
-						<property name="draw_indicator">True</property>
-						</widget>
-						<packing>
-						<property name="padding">0</property>
-						<property name="expand">False</property>
-						<property name="fill">False</property>
-						</packing>
+						<widget class="GtkVBox" id="vbox15">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <child>
+                              <widget class="GtkCheckButton" id="recurseDirs">
+                                <property name="visible">True</property>
+								<property name="can_focus">True</property>
+								<property name="label" translatable="yes">recurse?</property>
+								<property name="use_underline">True</property>
+								<property name="relief">GTK_RELIEF_NORMAL</property>
+								<property name="focus_on_click">True</property>
+								<property name="active">True</property>
+								<property name="inconsistent">False</property>
+								<property name="draw_indicator">True</property>
+                              </widget>
+                              <packing>
+                                <property name="padding">0</property>
+								<property name="expand">False</property>
+								<property name="fill">False</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <widget class="GtkCheckButton" id="exclusiveDirs">
+                                <property name="label" translatable="yes">exclusive?</property>
+                                <property name="visible">True</property>
+                                <property name="can_focus">True</property>
+                                <property name="receives_default">False</property>
+                                <property name="use_action_appearance">False</property>
+                                <property name="use_underline">True</property>
+                                <property name="draw_indicator">True</property>
+                              </widget>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">False</property>
+                                <property name="position">1</property>
+                              </packing>
+                            </child>
+                          </widget>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">False</property>
+                            <property name="position">2</property>
+                          </packing>
 					</child>
 					</widget>
 					<packing>
