@@ -1413,6 +1413,10 @@ on your system at present."))
         elif state == 0:
             if event.keyval in (ksyms.F2,):
                 self.on_rename_activate(event)
+            elif event.keyval in (ksyms.F3,):
+                self.on_select_from_that_folder_activate(event)
+            elif event.keyval in (ksyms.F4,):
+                self.on_select_from_choosen_folder_recursively_activate(event)
             elif event.keyval in (ksyms.Return,):
                 self.on_open_activate(event)
             elif event.keyval in (ksyms.Delete,):
@@ -1515,6 +1519,22 @@ on your system at present."))
         for row in xrange(clist.rows):
             if os.path.split(row_data[row])[0] == path:
                 select_func(row, 0)
+
+    # select all other duplicates from choosen folder recursively
+    def on_select_from_choosen_folder_recursively_activate(self, src):
+        clist = self.clists[self.mode]
+        if self.mode==self.mode_pkgs or len(clist.selection)!=1:
+            return
+        row = clist.selection[0] #menu item only enabled if 1 item selected
+        row_data = clist.get_data("row_data")
+        path = os.path.split(row_data[row])[0]
+        (response, path) = self.msgbox(_("path:"), ('Cancel', 'Ok'), path)
+
+        select_func=clist.select_row
+        for row in xrange(clist.rows):
+            if path in os.path.split(row_data[row])[0]:
+                select_func(row, 0)
+    
 
     def on_rename_activate(self, src):
         clist = self.clists[self.mode]

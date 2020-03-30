@@ -121,6 +121,16 @@
 		      <property name="label" translatable="yes">Select all in this directory</property>
 		      <property name="use_underline">True</property>
 		      <signal name="activate" handler="on_select_from_that_folder_activate" last_modification_time="Fri, 09 Dec 2011 14:54:12 GMT"/>
+			  <accelerator key="F3" modifiers="0" signal="activate"/>
+		    </widget>
+		  </child>
+		  <child>
+		    <widget class="GtkMenuItem" id="select_from_choosen_folder_recursively">
+		      <property name="visible">True</property>
+		      <property name="label" translatable="yes">Select all in from choosen directory recursively</property>
+		      <property name="use_underline">True</property>
+		      <signal name="activate" handler="on_select_from_choosen_folder_recursively_activate" last_modification_time="Fri, 09 Dec 2011 14:54:12 GMT"/>
+			  <accelerator key="F4" modifiers="0" signal="activate"/>
 		    </widget>
 		  </child>
 		</widget>
@@ -4118,7 +4128,7 @@
   <property name="type">GTK_WINDOW_TOPLEVEL</property>
   <property name="window_position">GTK_WIN_POS_CENTER_ON_PARENT</property>
   <property name="modal">True</property>
-  <property name="default_width">150</property>
+  <property name="default_width">500</property>
   <property name="default_height">100</property>
   <property name="resizable">True</property>
   <property name="destroy_with_parent">False</property>
